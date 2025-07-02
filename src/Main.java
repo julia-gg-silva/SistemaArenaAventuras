@@ -1,3 +1,5 @@
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.Scanner;
 
 public class Main {
@@ -6,7 +8,6 @@ public class Main {
 
     public static void main(String[] args) {
         menu();
-
     }
 
     public static void menu() {
@@ -127,6 +128,81 @@ public class Main {
         }
     }
 
+    private static void removerDesafio() {
+
+        System.out.println("--- Remover Desafio ---");
+
+        System.out.println("Informe o ID do Desafio que deseja remover: ");
+        int id = sc.nextInt();
+
+        Desafio desafio = ger.buscarDesafioPorId(id);
+
+        if (desafio == null) {
+            System.out.println("O Desafio não existe! Tente novamente!");
+            return;
+        }else {
+            System.out.println("Você tem certeza que deseja remover o Desafio '" + desafio.getNome()+"'?");
+            System.out.println("Sim - 1 | Não - 2");
+            int opcao = sc.nextInt();
+            if(opcao == 1){
+                ger.removerDesafio(desafio);
+            }else if(opcao == 2){
+                System.out.println("Ação cancelada!");
+                return;
+            }else{
+                System.out.println("Valor inválido! Tente novamente!");
+                return;
+            }
+        }
+    }
+
+    private static void atualizarDesafio() {
+
+        System.out.println("--- Atulizar Desafio ---");
+
+        sc.nextLine();
+        System.out.println("Informe o ID do Desafio que deseja atualizar: ");
+        int id = sc.nextInt();
+
+        Desafio desafio = ger.buscarDesafioPorId(id);
+
+        if (desafio == null) {
+            System.out.println("O Desafio não existe! Tente novamente!");
+            return;
+        }else{
+            System.out.println("- Alterar atributos -");
+            System.out.println("Nome: ");
+            String nome = sc.nextLine();
+            System.out.println("Dificuldade (1-3): ");
+            int dificuldade = sc.nextInt();
+
+            ger.atualizarDesafioGerenciamento(desafio, nome, dificuldade);
+        }
+    }
+
+    private static void criarDesafio() {
+        int contadorIds = 0;
+        System.out.println("--- Criar Desafio ---");
+
+        System.out.println("Informe o nome do Desafio: ");
+        String nome = sc.nextLine();
+
+        Desafio desafio = ger.buscarDesafioPorNome(nome);
+
+        if (desafio != null) {
+            System.out.println("O Desafio já existe! Tente novamente!");
+            return;
+        }else {
+            System.out.println("\n Informe a Dificuldade (1-3): ");
+            int dificuldade = sc.nextInt();
+
+            contadorIds++;
+
+            ger.criarDesafioGerenciamento(nome, dificuldade, contadorIds);
+        }
+
+    }
+
     private static void menuGerenciarHerois() {
         System.out.println("--- Gerenciar Heróis ---");
         System.out.println("1. Criar Herói");
@@ -152,11 +228,69 @@ public class Main {
         }
     }
 
-    private static void criarHeroi() {
-        System.out.println("--- Criar Heroi ---");
+    private static void removerHeroi() {
+        System.out.println("--- Remover Herói ---");
 
-        System.out.println("Informe o nome do Heroi");
+        sc.nextLine();
+        System.out.println("Informe o nome do Herói que deseja remover: ");
         String nome = sc.nextLine();
+
+        Heroi heroi = ger.buscarHeroiPorNome(nome);
+
+        if(heroi == null){
+            System.out.println("O Herói não existe! Tente novamente!");
+            return;
+        }else{
+            System.out.println("Você tem certeza que deseja remover o Herói '" + heroi.getNome()+"'?");
+            System.out.println("Sim - 1 | Não - 2");
+            int opcao = sc.nextInt();
+            if(opcao == 1){
+                ger.removerHeroi(heroi);
+            }else if(opcao == 2){
+                System.out.println("Ação cancelada!");
+                return;
+            }else{
+                System.out.println("Valor inválido! Tente novamente!");
+                return;
+            }
+        }
+    }
+
+    private static void atualizarHeroi() {
+        System.out.println("--- Atulizar Herói ---");
+
+        sc.nextLine();
+        System.out.println("Informe o nome do Herói que deseja atualizar: ");
+        String nome = sc.nextLine();
+
+        Heroi heroi = ger.buscarHeroiPorNome(nome);
+
+        if (heroi == null) {
+            System.out.println("O Herói não existe! Tente novamente!");
+            return;
+        }else{
+            System.out.println("- Alterar atributos -");
+            System.out.println("Nivel: ");
+            int nivel = sc.nextInt();
+            System.out.println("Vida Atual: ");
+            int vidaAtual = sc.nextInt();
+
+            ger.atualizarHeroiGerenciamento(heroi, nivel, vidaAtual);
+        }
+    }
+
+    private static void criarHeroi() {
+        System.out.println("--- Criar Herói ---");
+
+        System.out.println("Informe o nome do Herói");
+        String nome = sc.nextLine();
+
+        Heroi heroi = ger.buscarHeroiPorNome(nome);
+
+        if (heroi != null) {
+            System.out.println("O Herói já existe! Tente novamente!");
+            return;
+        }
 
         System.out.println("\n Informe a Classe (1-Guerreiro, 2-Mago, 3-Arqueiro): ");
         int classe = sc.nextInt();
@@ -176,12 +310,14 @@ public class Main {
             int inteligencia = sc.nextInt();
 
             Mago mago = new Mago(nome, nivel, inteligencia);
+            ger.adicionarHeroi(mago);
 
         } else if (classe == 3) {
             System.out.println("\n Informe o valor da Destreza: ");
             int destreza = sc.nextInt();
 
             Arqueiro arqueiro = new Arqueiro(nome, nivel, destreza);
+            ger.adicionarHeroi(arqueiro);
         }
     }
 

@@ -21,4 +21,8 @@ public class Guerreiro extends Heroi{
     public String toString(){
         return super.toString() + " - Força: " + forca;
     }
+
+    public int getForca() {
+        return forca;
+    }
 }

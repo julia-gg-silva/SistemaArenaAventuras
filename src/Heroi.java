@@ -89,4 +89,8 @@ public abstract class Heroi {
     public void setInventario(ArrayList<Item> inventario) {
         this.inventario = inventario;
     }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
 }
