@@ -104,6 +104,41 @@ public class Gerenciamento {
         System.out.println("Desafio ID "+ desafio.getId() +" removido com sucesso!");
     }
 
+    public void addHeroiADesafioGerenciamento(int id, String nome){
+        Desafio desafio = buscarDesafioPorId(id);
+        Heroi heroi = buscarHeroiPorNome(nome);
+        if(desafio == null || heroi == null){
+            System.out.println("Desafio e/ou Herói não existe! Tente novamente.");
+            return;
+        } else if(!heroi.getStatusVivo()){
+            System.out.println("Somentei Heróis vivos podem ser adicionados a um Desafio");
+        }else if(desafio.getListaParticipantes().contains(heroi)){
+            System.out.println("O Herói já está participando desse desafio.");
+        }else{
+            desafio.getListaParticipantes().add(heroi);
+            System.out.println("Herói '"+ heroi.getNome()+ "' foi adicionado a Desafio " + desafio.getNome() + "'");
+        }
+    }
+
+    public void removerHeroiDeDesafioGerenciamento(int id, String nome) {
+
+        Desafio desafio = buscarDesafioPorId(id);
+        Heroi heroi = buscarHeroiPorNome(nome);
+
+        if(desafio == null || heroi == null){
+            System.out.println("Desafio e/ou Herói não existe! Tente novamente.");
+            return;
+        } else if(desafio.getListaParticipantes().contains(heroi)){
+            desafio.getListaParticipantes().remove(heroi);
+            System.out.println("Herói '"+ heroi.getNome()+ "' foi removido do Desafio " + desafio.getNome() + "'");        }else{
+            System.out.println("O Herói informado não está participando desse desafio.");
+        }
+    }
+
+    public void iniciarDesafioGerenciamento(int id) {
+        Desafio desafio = buscarDesafioPorId(id);
+    }
+
     public void adicionarDesafio(Desafio desafio) {
 
     }
@@ -115,6 +150,4 @@ public class Gerenciamento {
     public void bucarHeroi(Heroi heroi) {
 
     }
-
-
 }

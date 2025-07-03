@@ -103,6 +103,41 @@ public class Main {
         }
     }
 
+    private static void iniciarDesafio() {
+
+        System.out.println("--- Inciar Desafio ---");
+        System.out.println("Informe o ID do desafio que deseja realizar: ");
+        int id = sc.nextInt();
+
+        ger.iniciarDesafioGerenciamento(id);
+    }
+
+
+    private static void removerHeroiDeDesafio() {
+
+        System.out.println("--- Removendo Herói de Desafio ---");
+
+        System.out.println("Informe o ID do Desafio: ");
+        int id = sc.nextInt();
+
+        System.out.println("Informe o Nome do Herói que deseja remover de Desafio: ");
+        String nome = sc.next();
+
+        ger.removerHeroiDeDesafioGerenciamento(id, nome);
+    }
+
+    private static void addHeroiADesafio() {
+        System.out.println("--- Adicionar Herói a Desafio ---");
+
+        System.out.println("Informe o ID do Desafio: ");
+        int id = sc.nextInt();
+
+        System.out.println("Informe o Nome do Herói que deseja adicionar no Desafio: ");
+        String nome = sc.next();
+
+        ger.addHeroiADesafioGerenciamento(id, nome);
+    }
+
     private static void menuGerenciarDesafios() {
         System.out.println("--- Gerenciar Desafios ---");
         System.out.println("1. Criar Deasfio");
