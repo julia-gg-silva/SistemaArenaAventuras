@@ -35,6 +35,7 @@ public abstract class Heroi {
 
            System.out.println("Heroi" + this.nome + " subiu de nível para " + this.nivel);
        }
+
     }
 
     public void adicionarItem(Item i){
@@ -51,7 +52,7 @@ public abstract class Heroi {
     public String toString(){
         return this.nome + " - Nível" + this.nivel +" - "+ "Vida: " +
                 this.vidaAtual + "/" + this.vidaMaxima + " - " + "XP: " +
-                this.experiencia;
+                this.experiencia + " - Classe: "+ this.classe;
     }
 
     public String getNome() {
@@ -92,5 +93,13 @@ public abstract class Heroi {
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
+    }
+
+    public ArrayList<Item> getInventario() {
+        return inventario;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
     }
 }

@@ -54,10 +54,10 @@ public class Main {
         int opcao = sc.nextInt();
         switch (opcao) {
             case 1:
-                listarHerois();
+                ger.listarHerois();
                 break;
             case 2:
-                listarDesafios();
+                ger.listarDesafios();
                 break;
             case 3:
                 buscarHeroi();
@@ -66,15 +66,43 @@ public class Main {
                 exibirInventario();
                 break;
             case 5:
-                agruparPorNivel();
+                ger.agruparPorNivel();
                 break;
             case 6:
-                agruparDesafioPorDificuldade();
+                ger.agruparDesafioPorDificuldade();
                 break;
             case 7:
                 break;
             default:
                 System.err.println("Opção invalida! Tente novamente!");
+        }
+    }
+
+    private static void exibirInventario() {
+        System.out.println("--- Exibir inventário do Herói ---");
+        System.out.println("Informe o nome do Herói que deseja verificar o inventário");
+        String nome = sc.next();
+
+        ger.exibirInventarioGerenciamento(nome);
+    }
+
+    private static void buscarHeroi() {
+        System.out.println("--- Buscar Heroi ---");
+        System.out.println("Informe o nome do Heroi que deseja buscar: ");
+        String nome = sc.next();
+
+        Heroi heroi = ger.buscarHeroiPorNome(nome);
+
+        if(heroi != null) {
+            System.out.println("Nome: " + heroi.getNome());
+            System.out.println("Classe: " + heroi.getClass().getSimpleName());
+            System.out.println("Nível: " + heroi.getNivel());
+            System.out.println("Vida: " + heroi.getVidaAtual());
+            System.out.println("Experiência: " + heroi.getExperiencia());
+            System.out.println("Itens\n: " + heroi.getInventario());
+        }else{
+            System.out.println("Heroi não encontrado! Tente novamente!");
+            return;
         }
     }
 

@@ -14,7 +14,14 @@ public class Arqueiro extends Heroi{
 
     @Override
     public int atacar() {
-        return destreza * this.getNivel() + 5;
+        int dano = destreza * this.getNivel() + 5;
+        for(Item item : getInventario()){
+            if(item instanceof Espada){
+                dano += ((Espada) item).getBonus();
+            }
+        }
+
+        return dano;
     }
 
     @Override

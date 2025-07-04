@@ -41,4 +41,12 @@ public class Desafio {
     public ArrayList<Heroi> getListaParticipantes() {
         return listaParticipantes;
     }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

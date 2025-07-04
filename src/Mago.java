@@ -15,7 +15,14 @@ public class Mago extends Heroi{
 
     @Override
     public int atacar() {
-        return inteligencia * this.getNivel() + 10;
+        int dano =  inteligencia * this.getNivel() + 10;
+        for(Item item : getInventario()){
+            if(item instanceof Espada){
+                dano += ((Espada) item).getBonus();
+            }
+        }
+
+        return dano;
     }
 
     @Override

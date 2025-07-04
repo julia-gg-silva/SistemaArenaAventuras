@@ -14,7 +14,15 @@ public class Guerreiro extends Heroi{
 
     @Override
     public int atacar() {
-        return forca * getNivel();
+        int dano =  forca * getNivel();
+
+        for(Item item : getInventario()){
+            if(item instanceof Espada){
+                dano += ((Espada) item).getBonus();
+            }
+        }
+
+        return dano;
     }
 
     @Override
